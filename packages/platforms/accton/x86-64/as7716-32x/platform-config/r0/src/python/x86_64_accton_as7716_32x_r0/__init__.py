@@ -1,5 +1,6 @@
 from onl.platform.base import *
 from onl.platform.accton import *
+import time
 
 class OnlPlatform_x86_64_accton_as7716_32x_r0(OnlPlatformAccton,
                                               OnlPlatformPortConfig_32x100):
@@ -120,4 +121,12 @@ class OnlPlatform_x86_64_accton_as7716_32x_r0(OnlPlatformAccton,
         subprocess.call('echo port22 > /sys/bus/i2c/devices/54-0050/port_name', shell=True)
         subprocess.call('echo port23 > /sys/bus/i2c/devices/55-0050/port_name', shell=True)
         subprocess.call('echo port24 > /sys/bus/i2c/devices/56-0050/port_name', shell=True)
+
+        # Linux 5.4
+        # https://github.com/torvalds/linux/commit/f1fb64b04bf414ab04e31ac107bb28137105c5fd
+        for bus in ['0-0077', '1-0076', '2-0071', '2-0072', '2-0073', '2-0074', '2-0075']:
+            with open('/sys/bus/i2c/devices/{}/idle_state'.format(bus), 'w') as f:
+                f.write('-2')
+            time.sleep(.5)
+
         return True
