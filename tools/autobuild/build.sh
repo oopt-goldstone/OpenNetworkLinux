@@ -35,9 +35,6 @@ while getopts ":b:s:d:u:p:vVc789r:" opt; do
                 echo "Selecting Debian 10 build..."
             fi
             ;;
-        c)
-            cd $ONL && git submodule update --init --recursive packages/platforms-closed
-            ;;
         b)
             BUILD_BRANCH=$OPTARG
             ;;
