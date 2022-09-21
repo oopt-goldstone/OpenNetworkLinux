@@ -129,6 +129,10 @@ onlp_sysi_oids_get(onlp_oid_t* table, int max)
         *e++ = ONLP_FAN_ID_CREATE(i);
     }
 
+    for (i = 1; i <= CHASSIS_MODULE_COUNT; i++) {
+        *e++ = ONLP_MODULE_ID_CREATE(i);
+    }
+
     return 0;
 }
 
